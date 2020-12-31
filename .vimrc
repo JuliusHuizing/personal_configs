@@ -119,11 +119,6 @@ highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "}}}
 
-"Making section layout possible (needs to be bottom of file)?
-set foldmethod=marker
-set foldlevel=0
-set modelines=1
-
 "" set the runtime path to include Vundle and initialize 
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
@@ -145,3 +140,7 @@ set modelines=1
 "call vundle#end()            " required
 "filetype plugin indent on    " required
 
+"Making section layout possible (needs to be bottom of file (modelines))
+set modelines=2
+set foldmethod=marker
+set foldlevel=0
