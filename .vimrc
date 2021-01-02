@@ -13,11 +13,13 @@ filetype indent on      " load filetype-specific indent files
 execute pathogen#infect()
 " Defines leader key
 let mapleader=","       " leader is comma
+"set line numbers
+set number
+"Yanking (copying) will move content to MacOS clipboard as well.
+set clipboard=unnamed
 
 " colors & layout {{{
 " NB. Ensure that the terminal you are working in is also set to solarized
-"set line numbers
-set number
 set background=dark
 colorscheme solarized
 syntax enable 
