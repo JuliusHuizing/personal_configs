@@ -68,11 +68,16 @@ nnoremap <C-H> <C-W><C-H>
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
-" move to beginning/end of line
+" move to beginning/end of line (Normal Mode)
 nnoremap B ^
 nnoremap E $
 nnoremap <d-E> <d-$>
 nnoremap <d-B> <d-^>
+" move to beginning/end of line (Visual Mode)
+xnoremap B ^
+xnoremap E $
+xnoremap <d-E> <d-$>
+xnoremap <d-B> <d-^>
 " $/^ doesn't do anything
 nnoremap $ <nop>
 nnoremap ^ <nop>
