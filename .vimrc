@@ -13,10 +13,22 @@ filetype indent on      " load filetype-specific indent files
 execute pathogen#infect()
 " Defines leader key
 let mapleader=","       " leader is comma
-"set line numbers
-set number
+"Generic behavior {{{
 "Yanking (copying) will move content to MacOS clipboard as well.
 set clipboard=unnamed
+set showmode                    "Show current mode down the bottom
+set scrolloff=5 " Keep 5 lines below and above the cursor
+"Reload files changed outside vim
+set autoread 
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+"}}}
 
 " colors & layout {{{
 " NB. Ensure that the terminal you are working in is also set to solarized
@@ -27,6 +39,8 @@ set cursorline
 set showcmd
 " Enables autocomplete functionality within Vim (e.g. autocomplete :! ls
 set wildmenu 
+"set line numbers
+set number
 " }}}
 
 " Tabs {{{
