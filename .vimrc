@@ -142,29 +142,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufWinEnter * silent NERDTreeMirror
 "}}}
 
-"Plugins (Vundle) {{{
-" set the runtime path to include Vundle and initialize 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-" add all your plugins here (note older versions of Vundle
-Plugin 'preservim/nerdtree'
-Plugin 'dense-analysis/ale'
-Plugin 'liuchengxu/space-vim-dark'
-Plugin 'sansyrox/vim-python-virtualenv'
-Plugin 'preservim/nerdcommenter'
-Plugin 'neoclide/coc.nvim'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-"}}}
-
 """Coc (Intellisense autocomplete etc.){{{
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -329,10 +306,35 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 "}}}
+
 " ALE (syntax checking) {{{
 "let b:ale_fixers = {'python': ['pylint']}
 
 "}}}
+
+"Plugins (Vundle) {{{
+" set the runtime path to include Vundle and initialize 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" add all your plugins here (note older versions of Vundle
+Plugin 'preservim/nerdtree'
+Plugin 'dense-analysis/ale'
+Plugin 'liuchengxu/space-vim-dark'
+Plugin 'sansyrox/vim-python-virtualenv'
+Plugin 'preservim/nerdcommenter'
+Plugin 'neoclide/coc.nvim'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"}}}
+
 "Making section layout possible (needs to be bottom of file (modelines))
 set modelines=2 "Aplies subsequent two lines only to the current file (.vimrc)
 set foldmethod=marker
