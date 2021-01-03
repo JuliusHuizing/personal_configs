@@ -114,34 +114,6 @@ set foldnestmax=10      " 10 nested fold max
 set foldmethod=indent
 "}}}
 
-"" Python-specific {{{
-""python with virtualenv support
-"py3 3
-"py3 << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"  execfile(activate_this, dict(__file__=activate_this))
-"EOF
-"
-"set encoding=utf-8
-"
-"au BufNewFile,BufRead *.py 
-"    \ set tabstop=4 |
-"    \ set softtabstop=4 |
-"    \ set shiftwidth=4 |
-"    \ set textwidth=79 |
-"    \ set expandtab |
-"    \ set autoindent |
-"    \ set fileformat=unix |
-"
-""Flagging Unnecessary Whitespace
-"highlight BadWhitespace ctermbg=red guibg=darkred
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-"}}}
-
 "NERDTREE (nav bar) {{{
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
@@ -151,6 +123,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * silent NERDTreeMirror
 "}}}
+
+"Plugins (Vundle) {{{
 " set the runtime path to include Vundle and initialize 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -163,10 +137,18 @@ Plugin 'gmarik/Vundle.vim'
 " add all your plugins here (note older versions of Vundle
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'preservim/nerdtree'
+Plugin 'dense-analysis/ale'
+Plugin 'altercation/vim-colors-solarized'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+"}}}
+
+" ALE (syntax checking) {{{
+"let b:ale_fixers = {'python': ['pylint']}
+
+"}}}
 "Making section layout possible (needs to be bottom of file (modelines))
 set modelines=2 "Aplies subsequent two lines only to the current file (.vimrc)
 set foldmethod=marker
