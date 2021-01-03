@@ -2,9 +2,6 @@
 " https://dougblack.io/words/a-good-vimrc.html
 "}}}
 
-"Automatically sources .vimrc after saving
-autocmd! bufwritepost $MYVIMRC source $MYVIMRC
-
 "Required to turn Vi into vim, which enables all kind of cooll stuff.
 set nocompatible              " required
 filetype off                  " required
@@ -116,20 +113,21 @@ set foldmethod=indent
 "}}}
 
 "" Python-specific {{{
-""python with virtualenv support
-python3 << EOF
-import os
-import subprocess
+"let g:python3_host_prog='/usr/bin/python3'
+"python with virtualenv support
+"python3 << EOF
+"import os
+"import subprocess
 
-if "VIRTUAL_ENV" in os.environ:
-    project_base_dir = os.environ["VIRTUAL_ENV"]
-    script = os.path.join(project_base_dir, "bin/activate")
-    pipe = subprocess.Popen(". %s; env" % script, stdout=subprocess.PIPE, shell=True)
-    output = pipe.communicate()[0].decode('utf8').splitlines()
-    env = dict((line.split("=", 1) for line in output))
-    os.environ.update(env)
+"if "VIRTUAL_ENV" in os.environ:
+    "project_base_dir = os.environ["VIRTUAL_ENV"]
+    "script = os.path.join(project_base_dir, "bin/activate")
+    "pipe = subprocess.Popen(". %s; env" % script, stdout=subprocess.PIPE, shell=True)
+    "output = pipe.communicate()[0].decode('utf8').splitlines()
+    "env = dict((line.split("=", 1) for line in output))
+    "os.environ.update(env)
 
-EOF
+"EOF
 "}}}
 
 "NERDTREE (nav bar) {{{
@@ -326,9 +324,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'dense-analysis/ale'
 Plugin 'liuchengxu/space-vim-dark'
-Plugin 'sansyrox/vim-python-virtualenv'
+"Plugin 'sansyrox/vim-python-virtualenv'
+Plugin 'cjrh/vim-conda'
 Plugin 'preservim/nerdcommenter'
 Plugin 'neoclide/coc.nvim'
+"Status bar below
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
