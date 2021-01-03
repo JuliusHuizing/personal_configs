@@ -32,8 +32,9 @@ endif
 
 " colors & layout {{{
 " NB. Ensure that the terminal you are working in is also set to solarized
-set background=dark
-colorscheme solarized
+"set background=dark
+"colorscheme solarized
+colorscheme space-vim-dark
 syntax enable 
 set cursorline
 set showcmd
@@ -114,6 +115,23 @@ set foldnestmax=10      " 10 nested fold max
 set foldmethod=indent
 "}}}
 
+"" Python-specific {{{
+""python with virtualenv support
+python3 << EOF
+import os
+import subprocess
+
+if "VIRTUAL_ENV" in os.environ:
+    project_base_dir = os.environ["VIRTUAL_ENV"]
+    script = os.path.join(project_base_dir, "bin/activate")
+    pipe = subprocess.Popen(". %s; env" % script, stdout=subprocess.PIPE, shell=True)
+    output = pipe.communicate()[0].decode('utf8').splitlines()
+    env = dict((line.split("=", 1) for line in output))
+    os.environ.update(env)
+
+EOF
+"}}}
+
 "NERDTREE (nav bar) {{{
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
@@ -138,7 +156,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'preservim/nerdtree'
 Plugin 'dense-analysis/ale'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'liuchengxu/space-vim-dark'
+Plugin 'sansyrox/vim-python-virtualenv'
+Plugin 'preservim/nerdcommenter'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
