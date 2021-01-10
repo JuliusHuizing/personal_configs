@@ -6,6 +6,7 @@
 set nocompatible              " required
 filetype off                  " required
 filetype indent on      " load filetype-specific indent files
+filetype plugin on
 " Allow for Pathogen plugins
 execute pathogen#infect()
 " Defines leader key
@@ -25,6 +26,7 @@ if has('persistent_undo')
   set undodir=~/.vim/backups
   set undofile
 endif
+
 "}}}
 
 " colors & layout {{{
@@ -103,6 +105,11 @@ nnoremap <leader>s :mksession<CR>
 ""fold /unfold with spacebar
 "fold /unfold with spacebar
 nnoremap <space> za
+
+
+" Run different filetypes using leader key
+autocmd FileType python map <buffer> <leader>r  :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType swift map <buffer> <leader>r  :w<CR>:exec '!swift' shellescape(@%, 1)<CR>
 "}}}
 
 " Folding {{{
@@ -110,24 +117,6 @@ set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=10      " 10 nested fold max
 set foldmethod=indent
-"}}}
-
-"" Python-specific {{{
-"let g:python3_host_prog='/usr/bin/python3'
-"python with virtualenv support
-"python3 << EOF
-"import os
-"import subprocess
-
-"if "VIRTUAL_ENV" in os.environ:
-    "project_base_dir = os.environ["VIRTUAL_ENV"]
-    "script = os.path.join(project_base_dir, "bin/activate")
-    "pipe = subprocess.Popen(". %s; env" % script, stdout=subprocess.PIPE, shell=True)
-    "output = pipe.communicate()[0].decode('utf8').splitlines()
-    "env = dict((line.split("=", 1) for line in output))
-    "os.environ.update(env)
-
-"EOF
 "}}}
 
 "NERDTREE (nav bar) {{{
@@ -310,6 +299,11 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 "}}}
 
+" Conda Envs {{{
+"Supress warning message when starting vim without an activated env
+let g:conda_startup_wrn_suppress = 1
+" }}}
+
 "Plugins (Vundle) {{{
 " set the runtime path to include Vundle and initialize 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -321,11 +315,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " add all your plugins here (note older versions of Vundle
+Plugin 'keith/swift.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'dense-analysis/ale'
 Plugin 'liuchengxu/space-vim-dark'
 "Plugin 'sansyrox/vim-python-virtualenv'
 Plugin 'cjrh/vim-conda'
+"Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'preservim/nerdcommenter'
 Plugin 'neoclide/coc.nvim'
 "Status bar below
